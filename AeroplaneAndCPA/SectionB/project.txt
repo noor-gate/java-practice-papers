@@ -1,0 +1,21 @@
+9
+A 3
+B 2
+C 3
+D 2
+E 1
+F 3
+G 2
+K 4
+H 1
+10
+Finish H
+H F G K
+F C D
+G D E
+K E
+C A
+D A B
+E B
+A Start
+B Start
