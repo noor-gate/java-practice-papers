@@ -47,12 +47,13 @@ public class CollisionDetection {
     while (!sortedPoints.isEmpty()) {
       Object2D nd = sortedPoints.peek();
       Point2D topLeft = new Point2D(nd.getCenter().x - nd.getSize(), nd.getCenter().y + nd.getSize());
-      Point2D topRight = new Point2D(nd.getCenter().x + nd.getSize(), nd.getCenter().y + nd.getSize());
+      Point2D topRight = new Point2D(nd.getCenter().x + nd.getSize(), nd.getCenter().y - nd.getSize());
       AABB safetyRegion = new AABB(topLeft, topRight);
-      if (!tree.queryRegion(safetyRegion).isEmpty()) {
+      if (tree.queryRegion(safetyRegion).isEmpty()) {
+        tree.add(nd);
+      } else {
         return false;
       }
-      tree.add(nd);
       sortedPoints.remove();
     }
     return true;

@@ -50,8 +50,8 @@ public class ParallelCollisionDetection {
     PriorityQueueInterface<Object2D> two = new PriorityQueue<>();
     PriorityQueueInterface<Object2D> three = new PriorityQueue<>();
 
-    AtomicBoolean collision = new AtomicBoolean();
-    ReentrantLock lock = new ReentrantLock();
+    AtomicBoolean collision = new AtomicBoolean(true);
+    ReentrantLock lock = new ReentrantLock(true);
 
     try {
 

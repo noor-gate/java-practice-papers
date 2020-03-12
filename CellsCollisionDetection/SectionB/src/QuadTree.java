@@ -96,18 +96,22 @@ public class QuadTree implements QuadTreeInterface {
       if (node.NE.region.covers(region.topLeft()) || node.NE.region.covers(region.topRight())
               || node.NE.region.covers(region.bottomLeft()) || node.NE.region.covers(region.bottomRight())) {
         queryRegionHelper(node.NE, region, bucket);
-      } else if (node.NW.region.covers(region.topLeft()) || node.NW.region.covers(region.topRight())
+      }
+      if (node.NW.region.covers(region.topLeft()) || node.NW.region.covers(region.topRight())
               || node.NW.region.covers(region.bottomLeft()) || node.NW.region.covers(region.bottomRight())) {
         queryRegionHelper(node.NW, region, bucket);
-      } else if (node.SE.region.covers(region.topLeft()) || node.SE.region.covers(region.topRight())
+      }
+      if (node.SE.region.covers(region.topLeft()) || node.SE.region.covers(region.topRight())
               || node.SE.region.covers(region.bottomLeft()) || node.SE.region.covers(region.bottomRight())) {
         queryRegionHelper(node.SE, region, bucket);
-      } else {
+      }
+      if (node.SW.region.covers(region.topLeft()) || node.SW.region.covers(region.topRight())
+              || node.SW.region.covers(region.bottomLeft()) || node.SW.region.covers(region.bottomRight())) {
         queryRegionHelper(node.SW, region, bucket);
       }
     } else {
-      for (int i = 0; i < node.values.size(); i++) {
-        if (region.covers(node.values.get(i + 1).getCenter())) {
+      for (int i = 1; i <= node.values.size(); i++) {
+        if (region.covers(node.values.get(i).getCenter())) {
           bucket.add(bucket.size() + 1, node.values.get(i));
         }
       }

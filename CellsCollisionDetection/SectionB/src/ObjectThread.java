@@ -18,17 +18,21 @@ public class ObjectThread extends Thread {
     @Override
     public void run() {
         while (!pq.isEmpty()) {
-            lock.lock();
-            Object2D nd = pq.peek();
-            Point2D topLeft = new Point2D(nd.getCenter().x - nd.getSize(), nd.getCenter().y + nd.getSize());
-            Point2D topRight = new Point2D(nd.getCenter().x + nd.getSize(), nd.getCenter().y + nd.getSize());
-            AABB safetyRegion = new AABB(topLeft, topRight);
-            if (!tree.queryRegion(safetyRegion).isEmpty()) {
-                collisions.getAndSet(false);
-            }
-            tree.add(nd);
-            pq.remove();
-            lock.unlock();
+
+                Object2D nd = pq.peek();
+                Point2D topLeft = new Point2D(nd.getCenter().x - nd.getSize(), nd.getCenter().y + nd.getSize());
+                Point2D topRight = new Point2D(nd.getCenter().x + nd.getSize(), nd.getCenter().y + nd.getSize());
+                AABB safetyRegion = new AABB(topLeft, topRight);
+                lock.lock();
+                try {
+                    if (!tree.queryRegion(safetyRegion).isEmpty()) {
+                        collisions.getAndSet(false);
+                    }
+                    tree.add(nd);
+                } finally {
+                    lock.unlock();
+                }
+                pq.remove();
         }
         collisions.getAndSet(true);
     }
