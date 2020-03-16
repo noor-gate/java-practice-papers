@@ -244,6 +244,7 @@ public class CompactWordsSetTest {
     assertEquals("Not all the words are unique.", uniqueWords.size(), uniqueWordsAsSet.size());
 
     Set<String> validWordsAsSet = Arrays.stream(validWordsShuffled).collect(Collectors.toSet());
+
     assertEquals("Not all the added words are in the list.", uniqueWordsAsSet, validWordsAsSet);
 
     List<String> orderedWords = new ArrayList<>(validWordsAsSet);
