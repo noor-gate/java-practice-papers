@@ -10,7 +10,7 @@ public class Tests {
   private static int mismatches = 0;
   private static boolean exception = false;
 
-  /*
+
   @Test
   public void testQuestion1() {
 
@@ -47,9 +47,9 @@ public class Tests {
     }
 
   }
-  */
 
-  /*
+
+
   @Test
   public void testQuestion2() {
 
@@ -101,9 +101,9 @@ public class Tests {
     assertTrue(!nested2.equals(nested1));
 
   }
-  */
 
-  /*
+
+
   @Test
   public void testQuestion3() {
 
@@ -167,9 +167,9 @@ public class Tests {
     assertEquals("Tuesday", unboundedBackup.get());
 
   }
-  */
 
-  /*
+
+
   @Test
   public void testQuestion4() {
 
@@ -216,7 +216,7 @@ public class Tests {
     assertTrue(comparator.compare(s2, s1) < 0);
 
   }
-  */
+
 
   private static void reportExceptionShouldHaveBeenThrown() {
     throw new RuntimeException("UnsupportedOperationException should have been thrown");
