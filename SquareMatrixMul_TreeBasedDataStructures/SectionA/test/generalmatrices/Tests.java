@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class Tests {
 
-  /*
+
   @Test
   public void testQuestion1() {
 
@@ -56,9 +56,9 @@ public class Tests {
           integerMatrixMatrix.toString());
 
   }
-  */
 
-  /*
+
+
   @Test
   public void testQuestion2() {
     final PairWithOperators p1 = new PairWithOperators(2, 3);
@@ -70,9 +70,9 @@ public class Tests {
     assertEquals(new Integer(8), p1.product(p2).getCoordX());
     assertEquals(new Integer(15), p1.product(p2).getCoordY());
   }
-  */
 
-  /*
+
+
   @Test
   public void testQuestion3() {
 
@@ -119,9 +119,9 @@ public class Tests {
     assertEquals(false, booleanMatrixProduct.get(2, 2));
 
   }
-  */
 
-  /*
+
+
   @Test
   public void testQuestion4() {
 
@@ -146,7 +146,7 @@ public class Tests {
     assertEquals(new Integer(-11269), productOfPairMatrices.get(1, 1).getCoordY());
 
   }
-  */
+
 
 
 }

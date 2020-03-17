@@ -1,7 +1,19 @@
 package generalmatrices.pair;
 
-public class PairWithOperators {
+import generalmatrices.operators.RingElement;
 
-  // TODO: populate as part of Question 2
+public class PairWithOperators extends Pair implements RingElement<PairWithOperators> {
+    public PairWithOperators(Integer coordX, Integer coordY) {
+        super(coordX, coordY);
+    }
 
+    @Override
+    public PairWithOperators sum(PairWithOperators other) {
+        return new PairWithOperators(getCoordX() + other.getCoordX(), getCoordY() + other.getCoordY());
+    }
+
+    @Override
+    public PairWithOperators product(PairWithOperators other) {
+        return new PairWithOperators(getCoordX() * other.getCoordX(), getCoordY() * other.getCoordY());
+    }
 }
