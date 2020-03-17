@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class Question4Tests {
 
-  /*
+
   DocFile f1 = new DocDataFile("we", new byte[] { 1 });
   DocFile f2 = new DocDataFile("went", new byte[] { 2, 2 });
   DocFile f3 = new DocDataFile("to", new byte[] { 3, 3, 3 });
@@ -93,6 +93,6 @@ public class Question4Tests {
     assertFalse(result.isPresent());
 
   }
-  */
+
 
 }
