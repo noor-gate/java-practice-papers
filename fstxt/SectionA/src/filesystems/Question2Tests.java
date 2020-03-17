@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class Question2Tests {
 
-  /*
+
   @Test
   public void testEquals() {
     DocDataFile f1 = new DocDataFile("hello", new byte[] { 1, 2, 3 });
@@ -52,6 +52,6 @@ public class Question2Tests {
     assertNotEquals(f2, null);
 
   }
-  */
+
 
 }

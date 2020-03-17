@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class Question3Tests {
 
-  /*
+
   DocFile f1 = new DocDataFile("f1", new byte[] { 1 });
   DocFile f2 = new DocDataFile("f2", new byte[] { 2, 2 });
   DocFile f3 = new DocDataFile("f3", new byte[] { 3, 3, 3 });
@@ -169,6 +169,6 @@ public class Question3Tests {
     assertSame(d4, d2.getFile("dir4"));
     assertSame(f1, d1.getFile("f1"));
   }
-  */
+  
 
 }

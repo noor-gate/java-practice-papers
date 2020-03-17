@@ -1,6 +1,6 @@
 package filesystems;
 
-public class DocDataFile extends DocFile {
+public final class DocDataFile extends DocFile {
 
     private byte[] contents;
 
@@ -48,4 +48,31 @@ public class DocDataFile extends DocFile {
         return new DocDataFile(getName(), contents);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof DocDataFile)) {
+            return false;
+        }
+        DocDataFile data = (DocDataFile) obj;
+        return getName().equals(data.getName())
+                && checkEqualArrays(contents, data.contents)
+                && hashCode() == data.hashCode();
+    }
+
+    private boolean checkEqualArrays(byte[] a, byte[] b) {
+        if (a.length != b.length) {
+            return false;
+        }
+        for(int i = 0; i < a.length; i++) {
+            if (a[i] != b[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
+    }
 }
