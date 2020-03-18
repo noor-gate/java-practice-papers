@@ -1,9 +1,6 @@
 package huffman;
 
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.TreeMap;
+import java.util.*;
 
 public class HuffmanEncoder {
 
@@ -31,29 +28,72 @@ public class HuffmanEncoder {
     TreeMap<String, Integer> sortedWords = new TreeMap<String,Integer>(wordCounts);
     PriorityQueue<HuffmanNode> queue = new PriorityQueue<>(sortedWords.size());
 
-    //YOUR IMPLEMENTATION HERE...
-    HuffmanNode root = null;
-    Map<String, String> word2bitSequence = null;
+    for (String s : sortedWords.keySet()) {
+      queue.offer(new HuffmanLeaf(sortedWords.get(s), s));
+    }
+
+    while (queue.size() > 1) {
+      HuffmanNode left = queue.poll();
+      HuffmanNode right = queue.poll();
+      queue.offer(new HuffmanInternalNode(left, right));
+    }
+
+    HuffmanNode root = queue.peek();
+
+    Map<String, String> word2bitSequence = traverse(root, "", new TreeMap<>());
+
 
     return new HuffmanEncoder(root, word2bitSequence);
+  }
+
+  private static Map<String, String> traverse(HuffmanNode root, String bit, Map<String, String> word2bitsequence) {
+    if (root instanceof HuffmanLeaf) {
+      word2bitsequence.put(((HuffmanLeaf) root).word, bit);
+    } else {
+      word2bitsequence = traverse(((HuffmanInternalNode) root).getLeft(), bit += "0", word2bitsequence);
+      word2bitsequence = traverse(((HuffmanInternalNode) root).getRight(), bit.substring(0, bit.length() - 1) + "1", word2bitsequence);
+    }
+    return word2bitsequence;
   }
 
 
   public String compress(List<String> text) {
     assert text != null && text.size() > 0;
 
-    //TODO: implement this method (Q2)
+    StringBuilder sb = new StringBuilder();
 
-    return null;
+    for (String t : text) {
+      if (!word2bitsequence.containsKey(t)) {
+        throw new HuffmanEncoderException();
+      }
+      sb.append(word2bitsequence.get(t));
+    }
+    return sb.toString();
   }
 
 
   public List<String> decompress(String compressedText) {
     assert compressedText != null && compressedText.length() > 0;
+    return decompressHelper(compressedText, root, new ArrayList<>());
+  }
 
-    //TODO: implement this method (Q3)
-
-    return null;
+  private List<String> decompressHelper(String compressedText, HuffmanNode root, List<String> words) {
+    if (root instanceof HuffmanLeaf) {
+      words.add(((HuffmanLeaf) root).word);
+      if (!compressedText.isEmpty()) {
+        decompressHelper(compressedText, this.root, words);
+      }
+    } else {
+      if (compressedText.isEmpty()) {
+        throw new HuffmanEncoderException();
+      }
+      if (compressedText.charAt(0) == '0') {
+        decompressHelper(compressedText.substring(1), ((HuffmanInternalNode) root).getLeft(), words);
+      } else {
+        decompressHelper(compressedText.substring(1), ((HuffmanInternalNode) root).getRight(), words);
+      }
+    }
+    return words;
   }
 
   // Below the classes representing the tree's nodes. There should be no need to modify them, but
@@ -95,5 +135,18 @@ public class HuffmanEncoder {
       this.left = left;
       this.right = right;
     }
+
+    public HuffmanNode getLeft() {
+      return left;
+    }
+
+    public HuffmanNode getRight() {
+      return right;
+    }
+
+    public HuffmanInternalNode asInternal() {
+      return this;
+    }
+
   }
 }
